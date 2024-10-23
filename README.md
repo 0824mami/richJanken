@@ -6,7 +6,7 @@
 （動きを表すためにタイマー機能付き）
 
 ## ③アプリのデプロイURL
-デプロイしている場合はURLを記入（任意）
+https://0824mami.github.io/richJanken/janken_12_oka.html
 
 ## ④アプリのログイン用IDまたはPassword（ある場合）
 - ID: 〇〇〇〇〇〇〇〇
