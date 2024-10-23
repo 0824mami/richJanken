@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <link rel="stylesheet" href="css/sample.css">
+  <title>じゃんけん</title>
+</head>
+
+<header>
+  <div class="header">
+    <h1> じゃんけんアプリへようこそ！</h1>
+</header>
+
+
+<body>
+  <main>
+    <!-- <button onclick="play('countdown')">さんのーがー</button> -->
+    <div class="btnBOX">
+      <button id="start" onClick='start()'>
+        <h2>タイマー<br>スタート</h2>
+      </button>
+    </div>
+    <div id='idDisplay'></div>
+
+    <ul id="your_hands">
+      <li id="gu_btn">グー</li>
+      <li id="cho_btn">チョキ</li>
+      <li id="par_btn">パー</li>
+    </ul>
+
+    <div id="echo">コンピュータの出した手は？「<span id="pc_hands">なに？</span>」</div>
+    <!-- <img id='computerChoiceImg' width="150" src="" alt=""> -->
+    <div id="computerChoiceImg">
+      <img src="">
+    </div>
+
+    <div class="timerOtherVer">
+      <p id="message">JavaScriptは面白いですか？</p>
+      <!-- 状況によってメッセージ内容を変えたいから、id属性を定義 -->
+      <input type="button" value="とっても！" onclick="disp()" />
+      <input type="button" value="ちょっとむずかしい・・" onclick="dispYell()" /><br>
+      <div class="StartImage">
+        <img src="img/JSonesan.jpeg" alt="声掛けお姉さん" />
+      </div>
+      <h2>JSおねえさん登場</h2>
+
+    </div>
+  </main>
+  <footer></footer>
+  <script>
+    var i = 3; //カウント初期値
+    Display(i);
+    var count = function () { //カウント表示
+      Display(i--);
+    }
+    function start() { //スタートボタン押したら起動
+      startButton = document.getElementById('start');
+      var timer = setInterval(function () {
+        count();
+        if (i < 0) {
+          clearInterval(timer);
+          Display('下からえらんでね！');
+        }
+      }, 500); //動作確認を迅速にするため今だけ０．５秒カウント
+    }
+    function Display(s) {
+      let oDisplay = document.getElementById('idDisplay');
+      oDisplay.innerText = s;
+    };
+
+    //じゃんけん用のSCRIPTを書いてください  
+    $("#gu_btn").on('click', function () {
+      const r = Math.ceil(Math.random() * 3);
+      if (r == 1) {
+        $("#pc_hands").html('グー');
+        $("#computerChoiceImg").html('<img src = img/gu_img.png>');
+        $("#judgement").html('あいこ');
+      };
+      if (r == 2) {
+        $("#pc_hands").html('チョキ');
+        $("#computerChoiceImg").html('<img src = img/choki_img.png>');
+        $("#judgement").html('あなたの勝ち！');
+      };
+      if (r == 3) {
+        $("#pc_hands").html('パー');
+        $("#computerChoiceImg").html('<img src = img/par_img.png>');
+        $("#judgement").html('あなたの負け・・');
+      };
+
+    });
+    $("#cho_btn").on('click', function () {
+      const r = Math.ceil(Math.random() * 3);
+      if (r == 1) {
+        $("#pc_hands").html('グー');
+        $("#computerChoiceImg").html('<img src = img/gu_img.png>');
+        $("#judgement").html('あなたの負け・・');
+      };
+      if (r == 2) {
+        $("#pc_hands").html('チョキ');
+        $("#computerChoiceImg").html('<img src = img/choki_img.png>');
+        $("#judgement").html('あいこ');
+      };
+      if (r == 3) {
+        $("#pc_hands").html('パー');
+        $("#computerChoiceImg").html('<img src = img/par_img.png>');
+        $("#judgement").html('あなたの勝ち！');
+      };
+    });
+
+    $("#par_btn").on('click', function () {
+      const r = Math.ceil(Math.random() * 3);
+      if (r == 1) {
+        $("#pc_hands").html('グー');
+        $("#computerChoiceImg").html('<img src = img/gu_img.png>');
+        $("#judgement").html('あなたの勝ち！');
+      };
+      if (r == 2) {
+        $("#pc_hands").html('チョキ');
+        $("#computerChoiceImg").html('<img src = img/choki_img.png>');
+        $("#judgement").html('あなたの負け・・');
+      };
+      if (r == 3) {
+        $("#pc_hands").html('パー');
+        $("#computerChoiceImg").html('<img src = img/par_img.png>');
+        $("#judgement").html('あいこ');
+      };
+    });
+
+  </script>
+  <script class="timerOtherVerScript">
+    document.addEventListener("DOMContentLoaded", function () {
+      let isDisp = false;  // 表示状態を記録するフラグ
+      let repeat;  // タイマーのIDを保持
+
+      if (repeat) {
+        clearTimeout(repeat);
+      }
+
+      let pMessage = document.getElementById("message"); // pMessageをここで定義
+
+      // メッセージを表示する関数
+      window.disp = function () {  // グローバル関数として定義
+        if (isDisp) {
+          pMessage.innerHTML = "それは良かったです！";
+          isDisp = false;
+        } else {
+          pMessage.innerHTML = "<br>";
+          isDisp = true;
+        }
+        repeat = setTimeout(disp, 500);  // 関数をそのまま渡す
+      };
+
+      let yellMessage = "私ももっとがんばります〜";  // 表示する文字列
+      let yellIndex = 1;
+
+      // メッセージを段階的に表示する関数
+      window.dispYell = function () {  // グローバル関数として定義
+        if (repeat) {
+          clearTimeout(repeat);
+        }
+
+        let pMessage = document.getElementById('message');
+        pMessage.innerHTML = yellMessage.substring(0, yellIndex);
+        yellIndex++;
+
+        if (yellIndex > yellMessage.length) {
+          yellIndex = 1;
+        }
+
+        repeat = setTimeout(dispYell, 500);  // 関数をそのまま渡す
+      };
+    });
+  </script>
+
+  <style>
+    .timerOtherVer {
+      color: #bf65ab;
+      text-align: center;
+    }
+
+
+    li:hover {
+      background: #b62222be;
+      color: #fff;
+    }
+
+    .header {
+      margin-bottom: 10px;
+      background-color: #e1d39394;
+    }
+
+    #computerChoiceImg {
+      width: 150px;
+      display: flex;
+      margin: 0 auto;
+    }
+
+    #echo {
+      text-align: center;
+      font-size: 28px;
+      color: #373737;
+    }
+
+    #judgement {
+      text-align: center;
+      font-size: 30px;
+      color: #373737;
+      font-weight: bold;
+    }
+
+    .btnBOX {
+      width: 180px;
+      margin-top: 30px;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    #start {
+
+      padding: 15px 15px;
+      display: flex;
+      margin: 0 auto;
+      letter-spacing: 0.6rem;
+      background-color: #e4bf1a;
+      color: white;
+      text-shadow: gray;
+      border-color: #322a06;
+      border-radius: 20%;
+    }
+
+    #start h2 {
+      text-align: center;
+    }
+
+
+    #idDisplay {
+      text-align: center;
+      color: #b62222;
+      font-weight: bold;
+    }
+
+    #countdown {
+      font-size: 2em;
+      text-align: center;
+      margin: 20px;
+    }
+
+    span {
+      margin: 0 10px;
+    }
+
+    .StartImage img {
+      width: 250px;
+    }
+  </style>
+</body>
+
+</html>

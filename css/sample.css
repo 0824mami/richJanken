@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #fff;
+    text-align: center;
+    letter-spacing: 0.7rem;
+}
+
+h1 {
+    font-size: 30px;
+    color: #373737;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+main {
+    /* border-bottom: 1px solid #ccc; */
+}
+
+footer {
+    background-color: #fff;
+    /* border-bottom: 1px solid #ccc; */
+    text-align: center;
+}
+
+p {
+    font-size: 200%;
+    text-align: center;
+    /* border-bottom: 1px solid #fff; */
+    height: 60px;
+}
+
+ul {
+    padding: 0;
+    border-top: 0.5px solid #666;
+    display: table;
+    /* 定義 */
+    table-layout: fixed;
+    width: 100%;
+}
+
+li {
+    text-align: center;
+    list-style-type: none;
+    border: 2px solid #666;
+    background-color: #FFF;
+    display: table-cell;
+    /* 定義 */
+    cursor: pointer;
+}
+
+li:hover {
+    background: #0066CC;
+    color: #fff;
+}
